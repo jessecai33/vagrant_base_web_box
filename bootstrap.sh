@@ -2,6 +2,13 @@
 
 # Ubuntu box provision
 
+# add following to  /etc/apt/sources.list
+# deb http://packages.dotdeb.org squeeze all
+# deb-src http://packages.dotdeb.org squeeze all
+
+wget http://www.dotdeb.org/dotdeb.gpg
+apt-key add dotdeb.gpg
+
 apt-get -y update
 
 # local time
@@ -39,6 +46,8 @@ apt-get -y install sysv-rc-conf
 # autostart php-fpm & nginx
 sysv-rc-conf nginx on
 sysv-rc-conf php5-fpm on
+
+# remember to change /etc/php5/fpm/php.ini => short_open_tag = On
 
 # start php-fpm & nginx
 service nginx start
