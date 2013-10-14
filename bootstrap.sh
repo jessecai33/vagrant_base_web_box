@@ -2,6 +2,7 @@
 
 # Ubuntu box provision
 
+# for newer php
 # add following to  /etc/apt/sources.list
 # deb http://packages.dotdeb.org squeeze all
 # deb-src http://packages.dotdeb.org squeeze all
@@ -9,7 +10,18 @@
 wget http://www.dotdeb.org/dotdeb.gpg
 apt-key add dotdeb.gpg
 
+# for newrelic
+# add following to  /etc/apt/sources.list
+# deb http://apt.newrelic.com/debian/ newrelic non-free
+
+wget -O- https://download.newrelic.com/548C16BF.gpg | apt-key add -
+
 apt-get -y update
+
+# New Relic
+apt-get install newrelic-sysmond
+nrsysmond-config --set license_key=XXXXXXXXXXXXXX
+/etc/init.d/newrelic-sysmond start
 
 # local time
 ln -sf /usr/share/zoneinfo/Australia/Sydney /etc/localtime
